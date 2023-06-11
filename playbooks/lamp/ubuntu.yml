@@ -1,10 +1,12 @@
 --- 
 - name: install lamp surver on ubuntu
   hosts: all
+  become: yes
   tasks:
    - name: update package and install apache 
      ansible.builtin.apt:
       name: apache2
+      update_cache: yes
       state: present
    - name: install php package
      ansible.builtin.apt:
