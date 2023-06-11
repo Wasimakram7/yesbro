@@ -1,0 +1,23 @@
+--- 
+- name: install lamp surver on ubuntu
+  hosts: all
+  tasks:
+   - name: update package and install apache 
+     ansible.builtin.apt:
+      name: apache2
+      state: present
+   - name: install php package
+     ansible.builtin.apt:
+      name:
+       - php
+       - libapache2-mod-php
+       - php-mysql
+      state: present
+   - name: copy info.php page 
+     ansible.builtin.copy:
+      src: info.php
+      dest: /var/www/html/info.php 
+   - name: restart apache2
+     ansible.builtin.systemd:
+      name: apache2
+      state: restart    
